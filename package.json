@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "i": "^0.3.7"
+  },
+  "name": "cosmetic-map",
+  "version": "1.0.0",
+  "description": "Монорепозиторий сервиса поиска косметологических заведений и услуг на карте.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

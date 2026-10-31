@@ -40,3 +40,35 @@ Bu loyihada birgalikda ishlaydigan barcha ishchilar shu yerda ro'yxatga olinadi.
 ## Litsenziya
 
 Ushbu loyiha MIT litsenziyasi ostida.
+
+---
+
+## Cosmetic Map (ветка Mobile-App)
+
+Монорепозиторий сервиса поиска косметологических заведений и услуг на карте.
+
+### Состав
+
+- `apps/mobile` — Flutter-клиент с feature-first структурой и GoRouter.
+- `apps/backend` — Django + DRF API.
+- `apps/admin` — React + TypeScript административная панель.
+- `infra` — Docker Compose, Nginx и Prometheus.
+- `docs` — архитектура и API-контракты.
+
+### Быстрый старт
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+После запуска:
+
+- API: http://localhost:8000/api/v1/
+- Swagger: http://localhost:8000/api/docs/
+- Admin UI: http://localhost:5173/
+- Django admin: http://localhost:8000/admin/
+- MinIO: http://localhost:9001/
+- Prometheus: http://localhost:9090/
+
+Локальная разработка без Docker описана в [docs/development.md](docs/development.md).

@@ -1,0 +1,48 @@
+name: cosmetic_map
+description: Cosmetic Map mobile client
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  dio: ^5.7.0
+  dartz: ^0.10.1
+  easy_localization: ^3.0.7
+  equatable: ^2.0.7
+  flutter_bloc: ^9.0.0
+  flutter_secure_storage: ^9.2.4
+  freezed_annotation: ^3.0.0
+  get_it: ^8.0.0
+  go_router: ^14.6.0
+  hive_ce: ^2.11.3
+  hive_ce_flutter: ^2.3.1
+  json_annotation: ^4.12.0
+  shared_preferences: ^2.5.3
+  url_launcher: ^6.3.1
+  yandex_maps_mapkit_lite: ^4.45.0
+  qr_flutter: ^4.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.15
+  freezed: ^3.0.6
+  json_serializable: ^6.9.5
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/translations/
+    - assets/images/profile/
+    - assets/images/salons/
+    - assets/images/masters/
+    - assets/images/home/
+    - assets/images/services/
+    - assets/images/catalog/
+    - assets/images/shop/

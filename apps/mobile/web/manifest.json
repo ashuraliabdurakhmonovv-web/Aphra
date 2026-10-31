@@ -1,0 +1,11 @@
+{
+  "name": "Cosmetic Map",
+  "short_name": "Cosmetic Map",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#C12391",
+  "description": "Cosmetic Map mobile client",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false
+}
