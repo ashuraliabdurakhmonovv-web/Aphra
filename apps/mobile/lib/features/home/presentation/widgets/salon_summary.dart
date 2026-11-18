@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../explore/data/datasources/salon_preview_catalog.dart';
+import '../../../favorites/presentation/favorites.dart';
 import '../../../explore/domain/entities/place.dart';
 import '../../../explore/presentation/pages/salon_details_page.dart';
 import '../../../explore/presentation/pages/salon_profile_page.dart';
@@ -72,12 +73,20 @@ void openSalonPage(BuildContext context, Place place) => Navigator.of(
   rootNavigator: true,
 ).push(MaterialPageRoute<void>(builder: (_) => SalonProfilePage(place: place)));
 
-void openBooking(BuildContext context, Place place, {String? serviceId}) =>
-    Navigator.of(context, rootNavigator: true).push(
-      MaterialPageRoute<void>(
-        builder: (_) => SalonDetailsPage(place: place, serviceId: serviceId),
-      ),
-    );
+void openBooking(
+  BuildContext context,
+  Place place, {
+  String? serviceId,
+  String? specialistId,
+}) => Navigator.of(context, rootNavigator: true).push(
+  MaterialPageRoute<void>(
+    builder: (_) => SalonDetailsPage(
+      place: place,
+      serviceId: serviceId,
+      specialistId: specialistId,
+    ),
+  ),
+);
 
 class InfoChip extends StatelessWidget {
   const InfoChip({
@@ -404,6 +413,7 @@ class SalonTile extends StatelessWidget {
     required this.photo,
     this.width,
     this.keyPrefix = 'home-salon',
+    this.onFavorite,
     super.key,
   });
 
@@ -414,6 +424,9 @@ class SalonTile extends StatelessWidget {
   /// Null fills the available width.
   final double? width;
   final String keyPrefix;
+
+  /// Replaces saving or removing the salon on a heart tap.
+  final VoidCallback? onFavorite;
 
   @override
   Widget build(BuildContext context) {
@@ -486,16 +499,39 @@ class SalonTile extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Positioned(
-                      right: 7,
-                      top: 6,
-                      child: Icon(
-                        Icons.favorite_border_rounded,
-                        color: Colors.white,
-                        size: 22,
-                        shadows: [
-                          Shadow(color: Color(0x40000000), blurRadius: 6),
-                        ],
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: ListenableBuilder(
+                        listenable: Favorites.shared.salons,
+                        builder: (context, _) {
+                          final favorite = Favorites.shared.salons.contains(
+                            place,
+                          );
+                          return InkResponse(
+                            key: Key('$keyPrefix-favorite-${place.id}'),
+                            onTap:
+                                onFavorite ??
+                                () => Favorites.shared.salons.toggle(place),
+                            radius: 18,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(7, 6, 7, 7),
+                              child: Icon(
+                                favorite
+                                    ? Icons.favorite_rounded
+                                    : Icons.favorite_border_rounded,
+                                color: favorite ? _pink : Colors.white,
+                                size: 22,
+                                shadows: const [
+                                  Shadow(
+                                    color: Color(0x40000000),
+                                    blurRadius: 6,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

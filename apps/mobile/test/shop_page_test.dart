@@ -1,4 +1,6 @@
 import 'package:cosmetic_map/features/cart/presentation/pages/cart_page.dart';
+import 'package:cosmetic_map/features/cart/presentation/shop_cart.dart';
+import 'package:cosmetic_map/features/favorites/presentation/favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -7,6 +9,8 @@ const _products = [
   'estee_double_wear',
   'kerastase_chroma',
   'olaplex_no3',
+  'chanel_chance',
+  'estee_night_repair',
 ];
 
 void main() {
@@ -57,11 +61,13 @@ void main() {
       'dior_lip_glow',
       'estee_double_wear',
       'kerastase_chroma',
+      'estee_night_repair',
+      'chanel_chance',
     ]);
 
     await tester.tap(find.byKey(const Key('shop-sort-price')));
     await tester.pumpAndSettle();
-    expect(_visibleProducts().first, 'kerastase_chroma');
+    expect(_visibleProducts().first, 'chanel_chance');
 
     await tester.tap(find.byKey(const Key('shop-sort-popular')));
     await tester.pumpAndSettle();
@@ -101,7 +107,9 @@ void main() {
 
     await tester.tap(find.byKey(const Key('shop-filters')));
     await tester.pumpAndSettle();
-    await tester.ensureVisible(find.byKey(const Key('shop-filter-brand-olaplex')));
+    await tester.ensureVisible(
+      find.byKey(const Key('shop-filter-brand-olaplex')),
+    );
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const Key('shop-filter-brand-olaplex')));
     await tester.pumpAndSettle();
@@ -152,6 +160,8 @@ Future<void> _pumpShop(WidgetTester tester) async {
     ..physicalSize = const Size(1206, 2622)
     ..devicePixelRatio = 3;
   addTearDown(tester.view.reset);
+  ShopCart.shared.clear();
+  Favorites.shared.clear();
   await tester.pumpWidget(const MaterialApp(home: CartPage()));
   await tester.pumpAndSettle();
 }

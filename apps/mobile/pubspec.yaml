@@ -46,3 +46,9 @@ flutter:
     - assets/images/services/
     - assets/images/catalog/
     - assets/images/shop/
+    - assets/images/support/
+    - assets/images/brand/
+    - assets/images/favorites/
+    - assets/images/bonuses/
+    - assets/images/payments/
+    - assets/images/notifications/

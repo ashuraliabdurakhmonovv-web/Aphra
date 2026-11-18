@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/di/service_locator.dart';
 import '../../../../core/platform/maps_launcher.dart';
+import '../../../favorites/presentation/favorites.dart';
 import '../../data/datasources/salon_preview_catalog.dart';
 import '../../domain/entities/place.dart';
 import '../widgets/salon_photo.dart';
@@ -135,7 +136,7 @@ class _SalonProfilePageState extends State<SalonProfilePage> {
   _Section _section = _Section.services;
   bool _jumping = false;
   bool _collapsed = false;
-  bool _favorite = false;
+  final _favorites = Favorites.shared;
   int _photo = 0;
 
   Place get _place => widget.place;
@@ -346,13 +347,16 @@ class _SalonProfilePageState extends State<SalonProfilePage> {
                 left: 0,
                 right: 0,
                 top: 0,
-                child: _TopBar(
-                  title: _place.name,
-                  collapsed: _collapsed,
-                  favorite: _favorite,
-                  onBack: () => Navigator.of(context).maybePop(),
-                  onShare: _share,
-                  onFavorite: () => setState(() => _favorite = !_favorite),
+                child: ListenableBuilder(
+                  listenable: _favorites.salons,
+                  builder: (context, _) => _TopBar(
+                    title: _place.name,
+                    collapsed: _collapsed,
+                    favorite: _favorites.salons.contains(_place),
+                    onBack: () => Navigator.of(context).maybePop(),
+                    onShare: _share,
+                    onFavorite: () => _favorites.salons.toggle(_place),
+                  ),
                 ),
               ),
               Positioned(
@@ -389,6 +393,7 @@ class _SalonProfilePageState extends State<SalonProfilePage> {
     ),
     const SizedBox(height: 10),
     _ServiceList(
+      salon: _place,
       services: catalog.services,
       onSelected: (service) => _book(service: service),
     ),
@@ -1058,32 +1063,52 @@ class _SectionHeader extends StatelessWidget {
 }
 
 class _ServiceList extends StatelessWidget {
-  const _ServiceList({required this.services, required this.onSelected});
+  const _ServiceList({
+    required this.salon,
+    required this.services,
+    required this.onSelected,
+  });
 
+  final Place salon;
   final List<SalonService> services;
   final ValueChanged<SalonService> onSelected;
 
   @override
   Widget build(BuildContext context) => SizedBox(
     height: 158,
-    child: ListView.separated(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
-      itemCount: services.length,
-      separatorBuilder: (_, __) => const SizedBox(width: 9),
-      itemBuilder: (context, index) => _ServiceCard(
-        service: services[index],
-        onTap: () => onSelected(services[index]),
+    child: ListenableBuilder(
+      listenable: Favorites.shared.services,
+      builder: (context, _) => ListView.separated(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+        itemCount: services.length,
+        separatorBuilder: (_, __) => const SizedBox(width: 9),
+        itemBuilder: (context, index) {
+          final saved = (salon: salon, service: services[index]);
+          return _ServiceCard(
+            service: services[index],
+            favorite: Favorites.shared.services.contains(saved),
+            onTap: () => onSelected(services[index]),
+            onFavorite: () => Favorites.shared.services.toggle(saved),
+          );
+        },
       ),
     ),
   );
 }
 
 class _ServiceCard extends StatelessWidget {
-  const _ServiceCard({required this.service, required this.onTap});
+  const _ServiceCard({
+    required this.service,
+    required this.favorite,
+    required this.onTap,
+    required this.onFavorite,
+  });
 
   final SalonService service;
+  final bool favorite;
   final VoidCallback onTap;
+  final VoidCallback onFavorite;
 
   @override
   Widget build(BuildContext context) => Container(
@@ -1116,16 +1141,26 @@ class _ServiceCard extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   Image.asset(ServicePhoto.of(service), fit: BoxFit.cover),
-                  const Positioned(
-                    top: 5,
-                    right: 6,
-                    child: Icon(
-                      Icons.favorite_border_rounded,
-                      color: Colors.white,
-                      size: 20,
-                      shadows: [
-                        Shadow(color: Color(0x55000000), blurRadius: 6),
-                      ],
+                  Positioned(
+                    top: 0,
+                    right: 0,
+                    child: InkResponse(
+                      key: Key('salon-service-favorite-${service.id}'),
+                      onTap: onFavorite,
+                      radius: 16,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(6, 5, 6, 6),
+                        child: Icon(
+                          favorite
+                              ? Icons.favorite_rounded
+                              : Icons.favorite_border_rounded,
+                          color: favorite ? _pink : Colors.white,
+                          size: 20,
+                          shadows: const [
+                            Shadow(color: Color(0x55000000), blurRadius: 6),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ],

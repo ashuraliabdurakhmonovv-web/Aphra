@@ -4,7 +4,7 @@
   },
   "navigation": {
     "home": "Bosh sahifa",
-    "search": "Qidiruv",
+    "map": "Xarita",
     "catalog": "Katalog",
     "favorites": "Sevimlilar",
     "cart": "Do‘kon",
@@ -95,6 +95,18 @@
     "reset": "Tozalash",
     "added": "{} savatga qo‘shildi",
     "cart_empty": "Savat hozircha bo‘sh",
+    "page_title": "Savat ({})",
+    "clear": "Tozalash",
+    "clear_title": "Savat tozalansinmi?",
+    "clear_message": "Barcha mahsulotlar savatdan olib tashlanadi.",
+    "cancel": "Bekor qilish",
+    "remove_item": "Mahsulotni o‘chirish",
+    "promo_code": "Promokod",
+    "items_count": "Mahsulotlar ({})",
+    "discount": "Chegirma",
+    "total_to_pay": "To‘lov uchun",
+    "go_to_payment": "To‘lovga o‘tish",
+    "back_to_shop": "Do‘konga qaytish",
     "cart_summary": "Savatda {} ta mahsulot, jami {}",
     "checkout_soon": "Buyurtma berish server ulangandan keyin paydo bo‘ladi.",
     "scanner_soon": "Shtrix-kod skaneri tez orada qo‘shiladi",
@@ -111,6 +123,44 @@
       "sets": "To‘plamlar",
       "salon_goods": "Salon\nmahsulotlari",
       "premium": "Premium"
+    },
+    "product_types": {
+      "lip_balm": "Lablar uchun balzam",
+      "foundation": "Tonal krem",
+      "hair_mask": "Bo‘yalgan sochlar uchun niqob",
+      "hair_treatment": "Sochni tiklovchi vosita",
+      "eau_de_parfum": "Parfyum suvi, 50 ml",
+      "serum": "Tiklovchi zardob"
+    },
+    "product_descriptions": {
+      "dior_lip_glow": "Lablarni namlaydi, tabiiy rang beradi va yanada yumshoq qiladi. Kundalik foydalanish uchun ideal. Rang lablarning tabiiy tusiga moslashadi, balzam esa kun bo‘yi qulaylik beradi.",
+      "estee_double_wear": "Mat finishli bardoshli tonal krem. Teri rangini tekislaydi va nuqsonlarni yashiradi. Kun bo‘yi, hatto issiqda ham yangi ko‘rinishni saqlaydi.",
+      "kerastase_chroma": "Bo‘yalgan sochlar uchun niqob. Sochni oziqlantiradi va yumshatadi, rangning to‘qligi va yaltiroqligini saqlaydi. Shampundan keyin nam sochga surting, 5 daqiqadan so‘ng yuving.",
+      "olaplex_no3": "Shikastlangan sochlar uchun vosita. Bo‘yash va turmakdan keyin sochni mustahkamlaydi, uni silliq va itoatkor qiladi. Haftada bir marta shampundan oldin nam sochga surting.",
+      "chanel_chance": "Mevali-gulli hidli parfyum suvi: behi va greypfrut, yasmin va atirgul, oq mushk. Bilak va bo‘yinga sepiladi.",
+      "estee_night_repair": "Barcha teri turlari uchun tiklovchi zardob. Namlaydi, teri rangini tekislaydi va terining tunda tiklanishiga yordam beradi. Kechqurun tozalangan teriga, kremdan oldin bir necha tomchi surting."
+    },
+    "product": {
+      "original": "Original mahsulot",
+      "reviews": {
+        "one": "{} ta sharh",
+        "other": "{} ta sharh"
+      },
+      "salon_page": "Salon sahifasi",
+      "description": "Mahsulot tavsifi",
+      "specifications": "Xususiyatlari va tarkibi",
+      "more": "Batafsil",
+      "less": "Yopish",
+      "shade": "Rangi",
+      "quantity": "Miqdori",
+      "delivery": "Tez yetkazib\nberish",
+      "genuine": "100% original\nmahsulot",
+      "returns": "7 kun ichida\nqaytarish",
+      "add": "Savatga qo‘shish",
+      "buy_now": "Hozir xarid qilish",
+      "favorite": "Sevimlilarga qo‘shish",
+      "share": "Ulashish",
+      "share_soon": "Mahsulot havolalari server ulangandan keyin paydo bo‘ladi."
     }
   },
   "categories": {
@@ -121,7 +171,77 @@
   },
   "favorites": {
     "title": "Sevimlilar",
-    "empty": "Saqlangan joylar shu yerda ko‘rinadi"
+    "subtitle": "Saqlangan mahsulotlar, salonlar, xizmatlar va ustalar",
+    "tabs": {
+      "products": "Mahsulotlar",
+      "salons": "Salonlar",
+      "services": "Xizmatlar",
+      "masters": "Ustalar"
+    },
+    "count": {
+      "products": {
+        "one": "{} ta mahsulot",
+        "other": "{} ta mahsulot"
+      },
+      "salons": {
+        "one": "{} ta salon",
+        "other": "{} ta salon"
+      },
+      "services": {
+        "one": "{} ta xizmat",
+        "other": "{} ta xizmat"
+      },
+      "masters": {
+        "one": "{} ta usta",
+        "other": "{} ta usta"
+      }
+    },
+    "sort": {
+      "added": "Qo‘shilgan sana bo‘yicha",
+      "price_up": "Avval arzonlari",
+      "price_down": "Avval qimmatlari",
+      "rating": "Reyting bo‘yicha"
+    },
+    "experience": {
+      "one": "{} yillik tajriba",
+      "other": "{} yillik tajriba"
+    },
+    "add_to_cart": "Savatga",
+    "book": "Yozilish",
+    "cart": "Savat",
+    "remove": "Sevimlilardan olib tashlash",
+    "removed": "Sevimlilardan olib tashlandi",
+    "undo": "Qaytarish",
+    "filters": "Filtrlar",
+    "nothing_found": "Hech narsa topilmadi",
+    "empty": {
+      "products": "Saqlangan mahsulotlar shu yerda ko‘rinadi",
+      "salons": "Saqlangan salonlar shu yerda ko‘rinadi",
+      "services": "Saqlangan xizmatlar shu yerda ko‘rinadi",
+      "masters": "Saqlangan ustalar shu yerda ko‘rinadi"
+    },
+    "empty_hint": "Saqlash uchun ♡ belgisini bosing",
+    "to_shop": "Do‘konga o‘tish",
+    "to_salons": "Salon topish"
+  },
+  "notifications_feed": {
+    "title": "Bildirishnomalar",
+    "back": "Orqaga",
+    "today": "Bugun",
+    "yesterday": "Kecha",
+    "october_10": "10-oktabr",
+    "booking_confirmed_title": "Yozuv tasdiqlandi",
+    "booking_confirmed_body": "Glow Studio salonidagi 15-oktabr, 14:00 dagi yozuvingiz tasdiqlandi.",
+    "booking_changed_title": "Yozuv o‘zgartirildi",
+    "booking_changed_body": "Nur Beauty salonidagi yozuvingiz 16-oktabr, 12:00 ga ko‘chirildi.",
+    "payment_success_title": "To‘lov muvaffaqiyatli",
+    "payment_success_body": "450 000 so‘m miqdoridagi to‘lovingiz muvaffaqiyatli amalga oshirildi.",
+    "bonus_awarded_title": "Bonuslar qo‘shildi",
+    "bonus_awarded_body": "Hisobingizga 150 bonus balli qo‘shildi.",
+    "booking_reminder_title": "Yozuv eslatmasi",
+    "booking_reminder_body": "Ertaga, 11-oktabr soat 13:00 da Diva Nails salonida yozuvingiz bor.",
+    "empty_title": "Hozircha bildirishnomalar yo‘q",
+    "empty_body": "Yozuvlaringiz, xaridlaringiz va APHRA’dagi boshqa amallaringiz haqidagi muhim xabarlar shu yerda ko‘rinadi."
   },
   "profile": {
     "title": "Profil",
@@ -170,7 +290,6 @@
     "manage": "Yozuvni boshqarish",
     "available_credits": "Mavjud kreditlar",
     "buy_credits": "Kredit sotib olish",
-    "payment_prepared": "To‘lov tayyorlandi",
     "payment_history": "Amaliyotlar tarixi",
     "credit_topup": "Kreditlarni to‘ldirish",
     "average_rating": "O‘rtacha baho",
@@ -186,16 +305,7 @@
     "promo_beauty": "Yangi xizmat uchun 20% chegirma",
     "promo_welcome": "Doimiy mijoz uchun bonus",
     "code_copied": "Promokod nusxalandi",
-    "support_chat": "Yordam chati",
-    "support_chat_hint": "Odatda bir necha daqiqada javob beramiz",
-    "chat_started": "Yordam chati ochildi",
-    "call_support": "Yordam xizmatiga qo‘ng‘iroq",
-    "call_prepared": "Yordam raqami tayyorlandi",
     "faq": "Ko‘p so‘raladigan savollar",
-    "faq_booking": "Yozuvni qanday o‘zgartirish mumkin?",
-    "faq_credits": "Kreditlar qanday ishlaydi?",
-    "faq_cancel": "Yozuvni qanday bekor qilish mumkin?",
-    "faq_answer": "Kerakli yozuvni ochib, mavjud amalni tanlang. O‘zgarishlar avtomatik saqlanadi.",
     "booking_notifications": "Yozuv eslatmalari",
     "booking_notifications_hint": "Tashrifdan oldin bildirishnoma olish",
     "offer_notifications": "Aksiya va takliflar",
@@ -217,6 +327,15 @@
     "security": "Xavfsizlik",
     "security_ready": "Xavfsizlik sozlamalari ochildi",
     "payment_methods": "To‘lov usullari",
+    "my_cards": "Mening kartalarim",
+    "manage_cards": "Boshqarish",
+    "main_card": "Asosiy",
+    "add_card": "Karta qo‘shish",
+    "bank_cards": "Bank kartalari",
+    "secure_payment": "Xavfsiz to‘lov",
+    "credit_purchase": "Kreditlar xaridi",
+    "cards_soon": "Kartalarni ulash to‘lov tizimi ulangandan keyin paydo bo‘ladi",
+    "credits_soon": "Kredit sotib olish to‘lov tizimi ulangandan keyin paydo bo‘ladi",
     "my_addresses": "Manzillarim",
     "app_settings": "Ilova sozlamalari",
     "dark_theme": "Tungi mavzu",
@@ -226,7 +345,13 @@
     "contact_us": "Biz bilan bog‘lanish",
     "legal_info": "Huquqiy ma’lumot",
     "legal_ready": "Huquqiy ma’lumot ochildi",
-    "logout": "Hisobdan chiqish"
+    "logout": "Hisobdan chiqish",
+    "promo_hint": "Promokodni kiriting",
+    "promo_apply": "Qo‘llash",
+    "promo_enter": "Promokodni kiriting",
+    "promo_have": "{} promokodi sizda allaqachon bor",
+    "promo_soon": "Promokodlarni tekshirish server ulangandan keyin ishlaydi",
+    "copy_code": "Promokodni nusxalash"
   },
   "appointments": {
     "title": "Yozuvlarim",
@@ -313,5 +438,44 @@
   },
   "common": {
     "retry": "Qayta urinish"
+  },
+  "support": {
+    "title": "Yordam",
+    "banner_title": "Biz doim aloqadamiz!",
+    "banner_text": "Buyurtma, to‘lov, yetkazib berish\nva qaytarishda yordam beramiz",
+    "chat": "Onlayn chat",
+    "chat_hint": "Tez javob beramiz",
+    "call": "Qo‘ng‘iroq qilish",
+    "telegram": "Telegram",
+    "faq": "Savol-javoblar",
+    "all_questions": "Barcha savollar",
+    "not_found": "Javob topmadingizmi?",
+    "not_found_hint": "Bizga yozing, yordam beramiz",
+    "write": "Yozish",
+    "chat_soon": "Ilovadagi chat tez orada paydo bo‘ladi. Hozircha Telegram orqali yozing.",
+    "call_failed": "Qo‘ng‘iroqni boshlab bo‘lmadi. Yordam raqami: {}",
+    "telegram_failed": "Telegram ochilmadi. Bizning akkaunt: @{}",
+    "questions": {
+      "reschedule": {
+        "question": "Yozuvni qanday o‘zgartirish mumkin?",
+        "answer": "«Profil» → «Yozuvlarim» bo‘limini oching, yozuvni tanlang va «Ko‘chirish» tugmasini bosing. Yangi vaqtni tanlang, yozuv yangilanadi."
+      },
+      "credits": {
+        "question": "Kreditlar qanday ishlaydi?",
+        "answer": "Kreditlar bilan salondagi yozuv uchun to‘lash mumkin. Xizmatning kreditlardagi narxi yozilishda ko‘rsatiladi. Kreditlarni «To‘lov va kreditlar» bo‘limida sotib olish mumkin, Premium tarifda esa har oy 20 kredit beriladi."
+      },
+      "cancel": {
+        "question": "Yozuvni qanday bekor qilish mumkin?",
+        "answer": "«Profil» → «Yozuvlarim» bo‘limini oching, yozuvni tanlang va «Bekor qilish» tugmasini bosing. Yozuv tarixga o‘tadi. To‘lovni qaytarish shartlari salon tarifiga bog‘liq."
+      },
+      "return": {
+        "question": "Mahsulotni qanday qaytarish mumkin?",
+        "answer": "Buyurtmani olganingizdan keyin 7 kun ichida bizga Telegram orqali yozing yoki qo‘ng‘iroq qiling. Mahsulot va qaytarish sababini ko‘rsating, qanday qaytarishni aytib beramiz."
+      },
+      "payment": {
+        "question": "Yozuv uchun qanday to‘lash mumkin?",
+        "answer": "Yozilishda to‘lov usulini tanlang: kreditlar, onlayn to‘lov yoki salonda to‘lash."
+      }
+    }
   }
 }

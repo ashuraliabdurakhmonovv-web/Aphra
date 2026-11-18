@@ -14,8 +14,12 @@ import '../../features/explore/presentation/bloc/explore_bloc.dart';
 import '../../features/explore/presentation/pages/explore_page.dart';
 import '../../features/favorites/presentation/pages/favorites_page.dart';
 import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/profile/presentation/pages/bonuses_page.dart';
+import '../../features/profile/presentation/pages/notifications_page.dart';
+import '../../features/profile/presentation/pages/payments_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
 import '../../features/profile/presentation/pages/profile_section_page.dart';
+import '../../features/profile/presentation/pages/support_page.dart';
 import '../../features/profile/presentation/bloc/profile_bloc.dart';
 
 const _startRoute = String.fromEnvironment(
@@ -37,7 +41,12 @@ final appRouter = GoRouter(
       ),
     ),
     // Opened from the home page and the profile, over the tab bar.
-    GoRoute(path: '/favorites', builder: (_, __) => const FavoritesPage()),
+    GoRoute(
+      path: '/favorites',
+      // ?tab=salons, services or masters opens that tab.
+      builder: (_, state) =>
+          FavoritesPage(initialTab: state.uri.queryParameters['tab']),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (_, __, shell) => _AppShell(shell: shell),
       branches: [
@@ -107,9 +116,7 @@ final appRouter = GoRouter(
                 ),
                 GoRoute(
                   path: 'payments',
-                  builder: (_, __) => const ProfileSectionPage(
-                    section: ProfileSection.payments,
-                  ),
+                  builder: (_, __) => const PaymentsPage(),
                 ),
                 GoRoute(
                   path: 'reviews',
@@ -124,13 +131,11 @@ final appRouter = GoRouter(
                 ),
                 GoRoute(
                   path: 'bonuses',
-                  builder: (_, __) =>
-                      const ProfileSectionPage(section: ProfileSection.bonuses),
+                  builder: (_, __) => const BonusesPage(),
                 ),
                 GoRoute(
                   path: 'support',
-                  builder: (_, __) =>
-                      const ProfileSectionPage(section: ProfileSection.support),
+                  builder: (_, __) => const SupportPage(),
                 ),
                 GoRoute(
                   path: 'settings',
@@ -144,9 +149,7 @@ final appRouter = GoRouter(
                 ),
                 GoRoute(
                   path: 'notifications',
-                  builder: (_, __) => const ProfileSectionPage(
-                    section: ProfileSection.notifications,
-                  ),
+                  builder: (_, __) => const NotificationsPage(),
                 ),
                 GoRoute(
                   path: 'qr',
@@ -186,9 +189,9 @@ class _AppShell extends StatelessWidget {
           label: 'navigation.home'.tr(),
         ),
         AppNavigationItem(
-          icon: Icons.search_rounded,
-          selectedIcon: Icons.search_rounded,
-          label: 'navigation.search'.tr(),
+          icon: Icons.map_outlined,
+          selectedIcon: Icons.map,
+          label: 'navigation.map'.tr(),
         ),
         AppNavigationItem(
           icon: Icons.grid_view_outlined,

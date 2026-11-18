@@ -4,7 +4,7 @@
   },
   "navigation": {
     "home": "Home",
-    "search": "Search",
+    "map": "Map",
     "catalog": "Catalog",
     "favorites": "Favorites",
     "cart": "Shop",
@@ -95,6 +95,18 @@
     "reset": "Reset",
     "added": "{} added to cart",
     "cart_empty": "Your cart is empty",
+    "page_title": "Cart ({})",
+    "clear": "Clear",
+    "clear_title": "Clear the cart?",
+    "clear_message": "All items will be removed from the cart.",
+    "cancel": "Cancel",
+    "remove_item": "Remove item",
+    "promo_code": "Promo code",
+    "items_count": "Items ({})",
+    "discount": "Discount",
+    "total_to_pay": "Total to pay",
+    "go_to_payment": "Proceed to payment",
+    "back_to_shop": "Back to shop",
     "cart_summary": "{} items in the cart, total {}",
     "checkout_soon": "Checkout will be available once the server is connected.",
     "scanner_soon": "The barcode scanner is coming soon",
@@ -111,6 +123,44 @@
       "sets": "Sets",
       "salon_goods": "Salon\nproducts",
       "premium": "Premium"
+    },
+    "product_types": {
+      "lip_balm": "Lip balm",
+      "foundation": "Foundation",
+      "hair_mask": "Mask for color-treated hair",
+      "hair_treatment": "Hair repair treatment",
+      "eau_de_parfum": "Eau de parfum, 50 ml",
+      "serum": "Repairing serum"
+    },
+    "product_descriptions": {
+      "dior_lip_glow": "Moisturizes lips, adds a natural tint and makes them softer. Ideal for everyday use. The color adapts to the natural tone of your lips, and the balm keeps them comfortable all day.",
+      "estee_double_wear": "Long-wearing foundation with a matte finish. Evens out skin tone and covers imperfections. Keeps a fresh look all day, even in the heat.",
+      "kerastase_chroma": "Mask for color-treated hair. Nourishes and softens the hair and keeps the color rich and shiny. Apply to damp hair after shampooing, leave for 5 minutes, then rinse.",
+      "olaplex_no3": "Treatment for damaged hair. Strengthens hair after coloring and styling and leaves it smooth and manageable. Apply to damp hair before shampooing once a week.",
+      "chanel_chance": "Eau de parfum with a fruity floral scent: quince and grapefruit, jasmine and rose, white musk. Apply to the wrists and neck.",
+      "estee_night_repair": "Repairing serum for all skin types. Hydrates, evens out the skin tone and helps the skin recover overnight. Apply a few drops to clean skin in the evening, before your cream."
+    },
+    "product": {
+      "original": "Original product",
+      "reviews": {
+        "one": "{} review",
+        "other": "{} reviews"
+      },
+      "salon_page": "Salon page",
+      "description": "Description",
+      "specifications": "Details and ingredients",
+      "more": "More",
+      "less": "Less",
+      "shade": "Shade",
+      "quantity": "Quantity",
+      "delivery": "Fast\ndelivery",
+      "genuine": "100% original\nproducts",
+      "returns": "7-day\nreturns",
+      "add": "Add to cart",
+      "buy_now": "Buy now",
+      "favorite": "Add to favorites",
+      "share": "Share",
+      "share_soon": "Product links will be available once the server is connected."
     }
   },
   "categories": {
@@ -121,7 +171,77 @@
   },
   "favorites": {
     "title": "Favorites",
-    "empty": "Saved places will appear here"
+    "subtitle": "Saved products, salons, services and masters",
+    "tabs": {
+      "products": "Products",
+      "salons": "Salons",
+      "services": "Services",
+      "masters": "Masters"
+    },
+    "count": {
+      "products": {
+        "one": "{} product",
+        "other": "{} products"
+      },
+      "salons": {
+        "one": "{} salon",
+        "other": "{} salons"
+      },
+      "services": {
+        "one": "{} service",
+        "other": "{} services"
+      },
+      "masters": {
+        "one": "{} master",
+        "other": "{} masters"
+      }
+    },
+    "sort": {
+      "added": "Recently added",
+      "price_up": "Price: low to high",
+      "price_down": "Price: high to low",
+      "rating": "Top rated"
+    },
+    "experience": {
+      "one": "{} year of experience",
+      "other": "{} years of experience"
+    },
+    "add_to_cart": "Add to cart",
+    "book": "Book",
+    "cart": "Cart",
+    "remove": "Remove from favorites",
+    "removed": "Removed from favorites",
+    "undo": "Undo",
+    "filters": "Filters",
+    "nothing_found": "Nothing found",
+    "empty": {
+      "products": "Saved products will appear here",
+      "salons": "Saved salons will appear here",
+      "services": "Saved services will appear here",
+      "masters": "Saved masters will appear here"
+    },
+    "empty_hint": "Tap ♡ to save",
+    "to_shop": "Go to the shop",
+    "to_salons": "Find a salon"
+  },
+  "notifications_feed": {
+    "title": "Notifications",
+    "back": "Back",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "october_10": "October 10",
+    "booking_confirmed_title": "Booking confirmed",
+    "booking_confirmed_body": "Your booking at Glow Studio for Oct 15, 2:00 PM is confirmed.",
+    "booking_changed_title": "Booking changed",
+    "booking_changed_body": "Your booking at Nur Beauty has moved to Oct 16, 12:00 PM.",
+    "payment_success_title": "Payment successful",
+    "payment_success_body": "Your payment of 450,000 sum was successful.",
+    "bonus_awarded_title": "Bonus points added",
+    "bonus_awarded_body": "150 points have been added to your account.",
+    "booking_reminder_title": "Booking reminder",
+    "booking_reminder_body": "Tomorrow, Oct 11 at 1:00 PM — your booking at Diva Nails.",
+    "empty_title": "No notifications yet",
+    "empty_body": "Important updates about your bookings, purchases, and other activity in APHRA will appear here."
   },
   "profile": {
     "title": "Profile",
@@ -170,7 +290,6 @@
     "manage": "Manage booking",
     "available_credits": "Available credits",
     "buy_credits": "Buy credits",
-    "payment_prepared": "Payment is ready",
     "payment_history": "Transaction history",
     "credit_topup": "Credit top-up",
     "average_rating": "Average rating",
@@ -186,16 +305,7 @@
     "promo_beauty": "20% off a new service",
     "promo_welcome": "A bonus for a regular client",
     "code_copied": "Promo code copied",
-    "support_chat": "Support chat",
-    "support_chat_hint": "We usually reply within a few minutes",
-    "chat_started": "Support chat opened",
-    "call_support": "Call support",
-    "call_prepared": "Support number prepared",
     "faq": "Frequently asked questions",
-    "faq_booking": "How do I change a booking?",
-    "faq_credits": "How do credits work?",
-    "faq_cancel": "How do I cancel a booking?",
-    "faq_answer": "Open the booking and select an available action. Changes are saved automatically.",
     "booking_notifications": "Booking reminders",
     "booking_notifications_hint": "Receive a reminder before your visit",
     "offer_notifications": "Offers and promotions",
@@ -217,6 +327,15 @@
     "security": "Security",
     "security_ready": "Security settings opened",
     "payment_methods": "Payment methods",
+    "my_cards": "My cards",
+    "manage_cards": "Manage",
+    "main_card": "Main",
+    "add_card": "Add card",
+    "bank_cards": "Bank cards",
+    "secure_payment": "Secure payment",
+    "credit_purchase": "Credit purchase",
+    "cards_soon": "Linking cards will be available once a payment system is connected",
+    "credits_soon": "Buying credits will be available once a payment system is connected",
     "my_addresses": "My addresses",
     "app_settings": "App settings",
     "dark_theme": "Dark theme",
@@ -226,7 +345,13 @@
     "contact_us": "Contact us",
     "legal_info": "Legal information",
     "legal_ready": "Legal information opened",
-    "logout": "Sign out"
+    "logout": "Sign out",
+    "promo_hint": "Enter a promo code",
+    "promo_apply": "Apply",
+    "promo_enter": "Enter a promo code",
+    "promo_have": "You already have the promo code {}",
+    "promo_soon": "Promo codes can be checked once the server is connected",
+    "copy_code": "Copy promo code"
   },
   "appointments": {
     "title": "My appointments",
@@ -313,5 +438,44 @@
   },
   "common": {
     "retry": "Retry"
+  },
+  "support": {
+    "title": "Support",
+    "banner_title": "We’re always here!",
+    "banner_text": "Help with orders, payments,\ndelivery and returns",
+    "chat": "Support chat",
+    "chat_hint": "Online replies",
+    "call": "Call us",
+    "telegram": "Telegram",
+    "faq": "Common questions",
+    "all_questions": "All questions",
+    "not_found": "No answer here?",
+    "not_found_hint": "Write to us and we’ll help",
+    "write": "Write",
+    "chat_soon": "In-app chat is coming soon. For now, message us on Telegram.",
+    "call_failed": "Couldn’t start the call. Support number: {}",
+    "telegram_failed": "Couldn’t open Telegram. Our account: @{}",
+    "questions": {
+      "reschedule": {
+        "question": "How do I change a booking?",
+        "answer": "Open Profile → My bookings, choose the booking and tap Reschedule. Pick a new time and the booking will be updated."
+      },
+      "credits": {
+        "question": "How do credits work?",
+        "answer": "Credits can pay for a salon booking. The price of a service in credits is shown when you book. Buy credits in Payments and credits; with the Premium plan you get 20 credits every month."
+      },
+      "cancel": {
+        "question": "How do I cancel a booking?",
+        "answer": "Open Profile → My bookings, choose the booking and tap Cancel. The booking moves to the history. Refund terms depend on the salon’s plan."
+      },
+      "return": {
+        "question": "How do I return a product?",
+        "answer": "Message us on Telegram or call us within 7 days of receiving your order. Tell us the product and the reason, and we’ll explain how to return it."
+      },
+      "payment": {
+        "question": "How do I pay for a booking?",
+        "answer": "When booking, choose how to pay: with credits, online or at the salon."
+      }
+    }
   }
 }

@@ -12,11 +12,8 @@ import '../widgets/profile_edit_dialog.dart';
 
 enum ProfileSection {
   appointments,
-  payments,
   reviews,
   addresses,
-  bonuses,
-  support,
   settings,
   notifications,
   clientQr,
@@ -223,11 +220,8 @@ class _ProfileSectionPageState extends State<ProfileSectionPage> {
 
   String get _titleKey => switch (widget.section) {
     ProfileSection.appointments => 'profile.my_appointments',
-    ProfileSection.payments => 'profile.payments',
     ProfileSection.reviews => 'profile.reviews',
     ProfileSection.addresses => 'profile.addresses',
-    ProfileSection.bonuses => 'profile.bonuses',
-    ProfileSection.support => 'profile.support',
     ProfileSection.settings => 'profile.settings',
     ProfileSection.notifications => 'profile.notifications',
     ProfileSection.clientQr => 'profile.client_qr',
@@ -236,11 +230,8 @@ class _ProfileSectionPageState extends State<ProfileSectionPage> {
 
   List<Widget> _content(BuildContext context) => switch (widget.section) {
     ProfileSection.appointments => _appointments(context),
-    ProfileSection.payments => _payments(context),
     ProfileSection.reviews => _reviews(context),
     ProfileSection.addresses => _addresses(context),
-    ProfileSection.bonuses => _bonuses(context),
-    ProfileSection.support => _support(context),
     ProfileSection.settings => _settings(context),
     ProfileSection.notifications => _notificationItems(context),
     ProfileSection.clientQr => _qr(context),
@@ -283,33 +274,6 @@ class _ProfileSectionPageState extends State<ProfileSectionPage> {
           ),
         ),
     ],
-  ];
-
-  List<Widget> _payments(BuildContext context) => [
-    _BalanceCard(
-      icon: Icons.account_balance_wallet_outlined,
-      value: '86',
-      label: 'profile.available_credits'.tr(),
-    ),
-    const SizedBox(height: 18),
-    _PrimaryAction(
-      label: 'profile.buy_credits'.tr(),
-      onPressed: () => _message(context, 'profile.payment_prepared'),
-    ),
-    const SizedBox(height: 24),
-    _SectionHeading('profile.payment_history'.tr()),
-    const SizedBox(height: 10),
-    _TransactionTile(
-      title: 'profile.premium'.tr(),
-      date: '12.10.2026',
-      amount: '-14',
-    ),
-    _TransactionTile(
-      title: 'profile.credit_topup'.tr(),
-      date: '01.10.2026',
-      amount: '+100',
-      positive: true,
-    ),
   ];
 
   List<Widget> _reviews(BuildContext context) => [
@@ -361,59 +325,6 @@ class _ProfileSectionPageState extends State<ProfileSectionPage> {
       _message(context, 'place.maps_unavailable');
     }
   }
-
-  List<Widget> _bonuses(BuildContext context) => [
-    _BalanceCard(
-      icon: Icons.card_giftcard_rounded,
-      value: '1 900',
-      label: 'profile.bonus_points'.tr(),
-    ),
-    const SizedBox(height: 22),
-    _SectionHeading('profile.promo_codes'.tr()),
-    const SizedBox(height: 10),
-    _PromoCard(
-      code: 'BEAUTY20',
-      description: 'profile.promo_beauty'.tr(),
-      onCopy: () => _message(context, 'profile.code_copied'),
-    ),
-    const SizedBox(height: 10),
-    _PromoCard(
-      code: 'WELCOME',
-      description: 'profile.promo_welcome'.tr(),
-      onCopy: () => _message(context, 'profile.code_copied'),
-    ),
-  ];
-
-  List<Widget> _support(BuildContext context) => [
-    _InfoCard(
-      icon: Icons.chat_bubble_outline_rounded,
-      title: 'profile.support_chat'.tr(),
-      subtitle: 'profile.support_chat_hint'.tr(),
-      onTap: () => _message(context, 'profile.chat_started'),
-    ),
-    const SizedBox(height: 10),
-    _InfoCard(
-      icon: Icons.phone_outlined,
-      title: 'profile.call_support'.tr(),
-      subtitle: '+998 71 200 00 00',
-      onTap: () => _message(context, 'profile.call_prepared'),
-    ),
-    const SizedBox(height: 22),
-    _SectionHeading('profile.faq'.tr()),
-    const SizedBox(height: 8),
-    for (final key in [
-      'profile.faq_booking',
-      'profile.faq_credits',
-      'profile.faq_cancel',
-    ])
-      Card(
-        child: ExpansionTile(
-          title: Text(key.tr()),
-          childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-          children: [Text('profile.faq_answer'.tr())],
-        ),
-      ),
-  ];
 
   List<Widget> _settings(BuildContext context) => [
     SwitchListTile.adaptive(
@@ -976,76 +887,4 @@ class _PrimaryAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       FilledButton(onPressed: onPressed, child: Text(label));
-}
-
-class _TransactionTile extends StatelessWidget {
-  const _TransactionTile({
-    required this.title,
-    required this.date,
-    required this.amount,
-    this.positive = false,
-  });
-  final String title;
-  final String date;
-  final String amount;
-  final bool positive;
-
-  @override
-  Widget build(BuildContext context) => ListTile(
-    contentPadding: const EdgeInsets.symmetric(horizontal: 4),
-    leading: const CircleAvatar(
-      backgroundColor: Color(0xFFFBE6F3),
-      child: Icon(Icons.receipt_long_outlined, color: AppColors.primary),
-    ),
-    title: Text(title),
-    subtitle: Text(date),
-    trailing: Text(
-      amount,
-      style: TextStyle(
-        color: positive ? AppColors.success : AppColors.textPrimary,
-        fontWeight: FontWeight.w700,
-      ),
-    ),
-  );
-}
-
-class _PromoCard extends StatelessWidget {
-  const _PromoCard({
-    required this.code,
-    required this.description,
-    required this.onCopy,
-  });
-  final String code;
-  final String description;
-  final VoidCallback onCopy;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(20),
-    ),
-    child: Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                code,
-                style: const TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                ),
-              ),
-              Text(description),
-            ],
-          ),
-        ),
-        IconButton(onPressed: onCopy, icon: const Icon(Icons.copy_rounded)),
-      ],
-    ),
-  );
 }

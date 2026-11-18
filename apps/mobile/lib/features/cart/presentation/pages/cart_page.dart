@@ -4,21 +4,24 @@ import 'package:flutter/material.dart';
 import '../../../../core/widgets/app_empty_state.dart';
 import '../../../home/presentation/widgets/salon_summary.dart' show price;
 import '../../data/datasources/shop_preview_catalog.dart';
+import '../../../favorites/presentation/favorites.dart';
+import '../shop_cart.dart';
+import '../shop_colors.dart';
+import 'product_page.dart';
+import 'shop_cart_page.dart';
 
-const _pink = Color(0xFFF51772);
-const _deepPink = Color(0xFFDE1458);
-const _ink = Color(0xFF111111);
-const _muted = Color(0xFF6C757D);
-const _hint = Color(0xFF9AA0AA);
-const _background = Color(0xFFFEF9FB);
-const _tileColor = Color(0xFFFDEDF2);
-const _chipColor = Color(0xFFFDE7F2);
-const _promoColor = Color(0xFFFDE9F0);
-const _imageColor = Color(0xFFFEF6F9);
-const _star = Color(0xFFFEC00E);
-const _shadow = [
-  BoxShadow(color: Color(0x129A1F55), blurRadius: 10, offset: Offset(0, 2)),
-];
+const _pink = ShopColors.pink;
+const _deepPink = Color(0xFFB0177A);
+const _ink = ShopColors.ink;
+const _muted = ShopColors.muted;
+const _hint = ShopColors.hint;
+const _background = ShopColors.background;
+const _tileColor = ShopColors.tile;
+const _chipColor = Color(0xFFFAE6F2);
+const _promoColor = Color(0xFFFBE8F4);
+const _imageColor = ShopColors.image;
+const _star = ShopColors.star;
+const _shadow = ShopColors.shadow;
 
 /// Side padding of the page.
 const _side = 18.0;
@@ -54,19 +57,28 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   final _search = TextEditingController();
   final _productsKey = GlobalKey();
-  final _favorites = <String>{};
-
-  /// Quantities by product id.
-  final _cart = <String, int>{};
+  final _cart = ShopCart.shared;
+  final _favorites = Favorites.shared.products;
   String? _categoryId;
   String? _brandId;
   var _sort = _Sort.popular;
 
   @override
+  void initState() {
+    super.initState();
+    _cart.addListener(_onCartChanged);
+    _favorites.addListener(_onCartChanged);
+  }
+
+  @override
   void dispose() {
     _search.dispose();
+    _cart.removeListener(_onCartChanged);
+    _favorites.removeListener(_onCartChanged);
     super.dispose();
   }
+
+  void _onCartChanged() => setState(() {});
 
   List<ShopProduct> get _visibleProducts {
     final query = _search.text.trim().toLowerCase();
@@ -86,39 +98,19 @@ class _CartPageState extends State<CartPage> {
     return products;
   }
 
-  int get _cartCount => _cart.values.fold(0, (sum, count) => sum + count);
-
   void _showMessage(String text) => ScaffoldMessenger.of(context)
     ..hideCurrentSnackBar()
     ..showSnackBar(SnackBar(content: Text(text)));
 
   void _addToCart(ShopProduct product) {
-    setState(
-      () => _cart.update(product.id, (count) => count + 1, ifAbsent: () => 1),
-    );
-    _showMessage(
-      'cart.added'.tr(args: ['${product.brand.name} ${product.name}']),
-    );
+    _cart.add(product);
+    _showMessage('cart.added'.tr(args: [product.fullName]));
   }
 
-  void _showCart() {
-    if (_cart.isEmpty) {
-      _showMessage('cart.cart_empty'.tr());
-      return;
-    }
-    final total = ShopPreviewCatalog.products.fold(
-      0,
-      (sum, product) => sum + product.price * (_cart[product.id] ?? 0),
-    );
-    _showMessage(
-      '${'cart.cart_summary'.tr(args: ['$_cartCount', price(total)])}\n'
-      '${'cart.checkout_soon'.tr()}',
-    );
-  }
-
-  void _toggleFavorite(ShopProduct product) => setState(() {
-    if (!_favorites.remove(product.id)) _favorites.add(product.id);
-  });
+  void _showCart() => Navigator.of(
+    context,
+    rootNavigator: true,
+  ).push(MaterialPageRoute<void>(builder: (_) => const ShopCartPage()));
 
   void _resetFilters() => setState(() {
     _categoryId = null;
@@ -171,7 +163,7 @@ class _CartPageState extends State<CartPage> {
             children: [
               Padding(
                 padding: side,
-                child: _Header(count: _cartCount, onCart: _showCart),
+                child: _Header(count: _cart.count, onCart: _showCart),
               ),
               const SizedBox(height: 4),
               Padding(
@@ -336,8 +328,9 @@ class _CartPageState extends State<CartPage> {
                       )
                     : _ProductGrid(
                         products: products,
-                        favorites: _favorites,
-                        onFavorite: _toggleFavorite,
+                        isFavorite: _favorites.contains,
+                        onOpen: (product) => openProductPage(context, product),
+                        onFavorite: _favorites.toggle,
                         onAdd: _addToCart,
                       ),
               ),
@@ -947,13 +940,15 @@ class _FilterTag extends StatelessWidget {
 class _ProductGrid extends StatelessWidget {
   const _ProductGrid({
     required this.products,
-    required this.favorites,
+    required this.isFavorite,
+    required this.onOpen,
     required this.onFavorite,
     required this.onAdd,
   });
 
   final List<ShopProduct> products;
-  final Set<String> favorites;
+  final bool Function(ShopProduct product) isFavorite;
+  final ValueChanged<ShopProduct> onOpen;
   final ValueChanged<ShopProduct> onFavorite;
   final ValueChanged<ShopProduct> onAdd;
 
@@ -971,7 +966,8 @@ class _ProductGrid extends StatelessWidget {
                 child: index < products.length
                     ? _ProductCard(
                         product: products[index],
-                        favorite: favorites.contains(products[index].id),
+                        favorite: isFavorite(products[index]),
+                        onOpen: () => onOpen(products[index]),
                         onFavorite: () => onFavorite(products[index]),
                         onAdd: () => onAdd(products[index]),
                       )
@@ -989,18 +985,21 @@ class _ProductCard extends StatelessWidget {
   const _ProductCard({
     required this.product,
     required this.favorite,
+    required this.onOpen,
     required this.onFavorite,
     required this.onAdd,
   });
 
   final ShopProduct product;
   final bool favorite;
+  final VoidCallback onOpen;
   final VoidCallback onFavorite;
   final VoidCallback onAdd;
 
   @override
   Widget build(BuildContext context) => _Surface(
     key: Key('shop-product-${product.id}'),
+    onTap: onOpen,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

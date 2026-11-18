@@ -2,6 +2,7 @@ import 'package:cosmetic_map/features/explore/data/datasources/salon_preview_cat
 import 'package:cosmetic_map/features/explore/domain/entities/place.dart';
 import 'package:cosmetic_map/features/explore/presentation/pages/salon_details_page.dart';
 import 'package:cosmetic_map/features/explore/presentation/pages/salon_profile_page.dart';
+import 'package:cosmetic_map/features/favorites/presentation/favorites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -16,6 +17,25 @@ const _place = Place(
 );
 
 void main() {
+  setUp(Favorites.shared.clear);
+
+  testWidgets('the hearts save the salon and its services', (tester) async {
+    await _pumpSalon(tester);
+    final favorites = Favorites.shared;
+
+    await tester.tap(find.byKey(const Key('salon-favorite')));
+    await tester.tap(find.byKey(const Key('salon-service-favorite-manicure')));
+    await tester.pump();
+    expect(favorites.salons.newestFirst, [_place]);
+    expect(favorites.services.newestFirst.map((saved) => saved.service.id), [
+      'manicure',
+    ]);
+
+    await tester.tap(find.byKey(const Key('salon-favorite')));
+    await tester.pump();
+    expect(favorites.salons.length, 0);
+  });
+
   testWidgets('shows the salon summary from the demo catalog', (tester) async {
     await _pumpSalon(tester);
 

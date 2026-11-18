@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../auth/domain/entities/registration_profile.dart';
+import '../../../favorites/presentation/favorites.dart';
 import '../bloc/profile_bloc.dart';
 
 const _pink = Color(0xFFE60093);
@@ -250,7 +251,12 @@ class _Stats extends StatelessWidget {
   const _Stats();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => ListenableBuilder(
+    listenable: Favorites.shared.changes,
+    builder: (context, _) => _build(context),
+  );
+
+  Widget _build(BuildContext context) {
     final items = [
       (
         Icons.calendar_month_outlined,
@@ -260,7 +266,7 @@ class _Stats extends StatelessWidget {
       ),
       (
         Icons.favorite_border_rounded,
-        '12',
+        '${Favorites.shared.count}',
         'profile.favorites_count',
         '/favorites',
       ),
